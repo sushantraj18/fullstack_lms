@@ -1,30 +1,76 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function AdminRegister() {
-  return (
-    <div>
-        <div className="flex flex-col w-full max-w-md p-12 space-y-4 text-center dark:bg-gray-50 dark:text-gray-800">
-	<h1 className="text-3xl font-semibold">Sign in to your account</h1>
-	<a className="text-sm dark:text-gray-600" href="/">Or start your free trial</a>
-	<form noValidate="" className="space-y-4">
-		<div className="flex flex-col">
-			<label htmlFor="email" className="sr-only">Email address</label>
-			<input id="email" type="email" placeholder="Email address" className="rounded-t-md dark:border-gray-400 dark:bg-gray-50 dark:text-gray-800 focus:dark:ring-violet-600 focus:dark:border-violet-600 focus:ring-2" />
-			<label htmlFor="password" className="sr-only">Password</label>
-			<input id="password" type="text" placeholder="Password" className="-mt-1 rounded-b-md dark:border-gray-400 dark:bg-gray-50 dark:text-gray-800 focus:dark:ring-violet-600 focus:dark:border-violet-600 focus:ring-2" />
-		</div>
-		<div className="flex justify-between">
-			<div className="flex items-center">
-				<input type="checkbox" name="remember" id="remember" aria-label="Remember me" className="mr-1 rounded-sm focus:dark:ring-violet-600 focus:dark:border-violet-600 focus:ring-2 dark:accent-violet-600" />
-				<label htmlFor="remember" className="text-sm dark:text-gray-600">Remember me</label>
+	const [adminFormData,setAdminFormData] = useState({})
+	const [loading, setLoading] = useState(false)
+
+	function handleSubmit(e) {
+		e.preventDefault()
+		console.log(adminFormData)
+
+	}
+
+	function handleChange(e) {
+		setAdminFormData({...adminFormData,[e.target.id] : e.target.value})
+	}
+
+	return (
+		<div>
+			<div className="relative py-3 sm:max-w-xs sm:mx-auto">
+				<div className="min-h-96 px-8 py-6 mt-4 text-left bg-zing-800  rounded-xl shadow-lg">
+					<div className="flex flex-col justify-center items-center h-full select-none">
+						<div className="flex flex-col items-center justify-center gap-2 mb-8">
+
+							<p className="m-0 text-gray-400 text-[16px] font-semibold ">
+								Admin Sign Up
+							</p>
+
+						</div>
+						<form  onSubmit={handleSubmit}>
+							<div className="w-full flex flex-col gap-2">
+								<label className="font-semibold text-xs text-gray-400">Admin name</label>
+								<input placeholder="Username" id="adminname" className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900" onChange={handleChange} />
+							</div>
+
+							<div className="w-full flex flex-col gap-2">
+								<label className="font-semibold text-xs text-gray-400">Email</label>
+								<input placeholder="yourmail@" id="email" type='email' className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900" onChange={handleChange} />
+							</div>
+
+							<div className="w-full flex flex-col gap-2">
+								<label className="font-semibold text-xs text-gray-400">Password</label>
+								<input placeholder="••••••••" id="password" type='password' className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900" onChange={handleChange} />
+							</div>
+
+							<div>
+								<label className="form-control w-full max-w-xs">
+									<div className="label">
+										<span className="label-text">Pick a Profile</span>
+									</div>
+									<input type="file" id="file" className="file-input file-input-bordered w-full max-w-xs" />
+									
+								</label>
+							</div>
+
+							<div>
+								<button disabled={loading} className="py-1 mt-4 px-8 bg-blue-500 hover:bg-blue-800 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg cursor-pointer select-none">
+									{loading ? 'Loading...' : 'Sign Up'}
+								</button>
+							</div>
+						</form>
+						<div className="text-sm text-gray-400 flex gap-2 mt-3">
+							<span>Hava an account?</span>
+							<Link className="hover:text-blue-800" to={"/login"}>Sign-in</Link>
+						</div>
+
+					</div>
+
+
+				</div>
 			</div>
-			<a className="text-sm dark:text-gray-600" href="/">Forgot your password?</a>
 		</div>
-		<button type="button" className="px-8 py-3 space-x-2 font-semibold rounded dark:bg-violet-600 dark:text-gray-50">Sign in</button>
-	</form>
-</div>
-    </div>
-  )
+	)
 }
 
 export default AdminRegister
