@@ -1,4 +1,5 @@
 import React from "react"
+import { NavLink } from "react-router-dom"
 
 
 function  Header(){
@@ -8,10 +9,10 @@ function  Header(){
 	<div className="container flex justify-between h-16 mx-auto">
 		<ul className="items-stretch hidden space-x-3 lg:flex">
 			<li className="flex">
-				<a rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border- dark:text-violet-600 dark:border-violet-600">Home</a>
+				<NavLink to="/" rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border- dark:text-violet-600 dark:border-violet-600">Home</NavLink>
 			</li>
 			<li className="flex">
-				<a rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-">Dashboard</a>
+				<NavLink to="dashboard" rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-">Dashboard</NavLink>
 			</li>
 			<li className="flex">
 				<a rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-">About us</a>
@@ -37,7 +38,8 @@ function  Header(){
 				</span>
 				<input type="search" name="Search" placeholder="Search..." className="w-32 py-2 pl-10 text-sm rounded-md sm:w-auto focus:outline-none dark:bg-gray-100 dark:text-gray-800 focus:dark:bg-gray-50" />
 			</div>
-			<button type="button" className="hidden px-6 py-2 font-semibold rounded lg:block dark:bg-violet-600 dark:text-gray-50">Log in</button>
+			<NavLink to="register" type="button"  className="hidden px-6 py-2 font-semibold btn rounded lg:block dark:bg-violet-600 hover:bg-violet-700 dark:text-gray-50">Sign in</NavLink>
+			<NavLink to="login" type="button" className="hidden px-6 py-2 font-semibold  btn rounded lg:block dark:bg-violet-600 hover:bg-violet-700 dark:text-gray-50">Log in</NavLink>
 		</div>
 		<button title="Open menu" type="button" className="p-4 lg:hidden">
 			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-gray-800">

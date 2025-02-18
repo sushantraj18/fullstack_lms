@@ -8,6 +8,7 @@ import FacultyDashboard from './components/pages/FacultyDashboard'
 import AdminRegister from './components/admin/AdminRegister'
 import AdminDashboard from './components/admin/AdminDashboard'
 import AdminLogin from './components/admin/AdminLogin'
+import Login from './components/pages/Login'
 
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
       <Route path="/adminregister" Component={AdminRegister}/>
       <Route path="/admindashboard" Component={AdminDashboard}/>
       <Route path="/adminlogin" Component={AdminLogin}/>
-
+      <Route path="/login" Component={Login}/>
+ 
     
     </Routes>
       <Footer/>

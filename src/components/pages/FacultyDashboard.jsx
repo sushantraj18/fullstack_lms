@@ -4,9 +4,19 @@ import Card from '../Card'
 
 function FacultyDashboard() {
   return (
-    <div>
+    <div className="flex ">
         <Sidebar/>
+        <div className="flex flex-wrap justify-center gap-3 p-3 ">
         <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+
+        </div>
+        
     </div>
   )
 }
