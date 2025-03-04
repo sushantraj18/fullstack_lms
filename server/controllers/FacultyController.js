@@ -4,8 +4,16 @@ import facultyModel from '../models/FacultyModel.js';
 import bcrypt, { genSalt } from 'bcrypt'
 
 export const facultyRegister = async(req,res)=>{
-    const {facultyName,facultyEmail,facultyPassword,facultyCourse}= req.body;
+    const {facultyName,facultyEmail,facultyPassword}= req.body;
+    const {adminId}= req.params
+    const profile = req.file
+    console.log(adminId)
+    console.log(profile)
     try{
+
+        if(!facultyName || !facultyEmail || !facultyPassword || !adminId || !profile){
+            return handleRes(res,400,"all field required")
+        }
 
         const checkUser =  await facultyModel.findOne({facultyEmail})
 
@@ -15,7 +23,7 @@ export const facultyRegister = async(req,res)=>{
 
         const hashPassword = await bcrypt.hash(facultyPassword,12)
 
-        const createFaculty =  new facultyModel({facultyName,facultyEmail,facultyCourse,facultyPassword:hashPassword})
+        const createFaculty =  new facultyModel({facultyName,facultyEmail,facultyPassword:hashPassword,profile : profile.filename,adminId})
 
         await createFaculty.save()
 

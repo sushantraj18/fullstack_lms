@@ -20,7 +20,7 @@ app.set("view engine" , "ejs")
 
 app.use("/api/lms/admin",adminRoute)
 app.use("/api/lms",studentRoute)
-app.use("/api/lms",facultyRoute)
+app.use("/api/lms/faculty",facultyRoute)
 
 
 app.all("*",(req,res)=>{

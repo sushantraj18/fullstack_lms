@@ -1,22 +1,65 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 
 function StudentLogin() {
+	const handleSubmit = async ()=>{
+
+	}
+
+	const changeHandler = ()=>{
+
+	}
+
+	const loading = false;
   return (
-    <div>
-        <div className="flex items-center justify-center text-center dark:bg-gray-50 dark:text-gray-800">
-	<form noValidate="" action="" className="flex flex-col w-full max-w-lg p-12 rounded shadow-lg dark:text-gray-800">
-		<label htmlFor="username" className="self-start text-xs font-semibold">Username or Email</label>
-		<input id="username" type="text" className="flex items-center h-12 px-4 mt-2 rounded dark:text-gray-50 focus:outline-none focus:ring-2 focus:dark:border-violet-600 focus:dark:ring-violet-600" />
-		<label htmlFor="password" className="self-start mt-3 text-xs font-semibold">Password</label>
-		<input id="password" type="password" className="flex items-center h-12 px-4 mt-2 rounded dark:text-gray-50 focus:outline-none focus:ring-2 focus:dark:border-violet-600 focus:dark:ring-violet-600" />
-		<button type="submit" className="flex items-center justify-center h-12 px-6 mt-8 text-sm font-semibold rounded dark:bg-violet-600 dark:text-gray-50">Login</button>
-		<div className="flex justify-center mt-6 space-x-2 text-xs">
-			<a rel="noopener noreferrer" href="#" className="dark:text-gray-600">Forgot Password?</a>
-			<span className="dark:text-gray-600">/</span>
-			<a rel="noopener noreferrer" href="#" className="dark:text-gray-600">Sign Up</a>
-		</div>
-	</form>
-</div>
+    <div className="flex  items-center p-4 ">
+      <div className="text-center  text-white w-[50%] " >
+        <h1 className="text-1xl  ">Sign in to  <span className="text-3xl font-bold ">best </span>  blog's </h1>
+      </div>
+      <div className="relative py-3 sm:max-w-xs sm:mx-auto">
+        <div className="min-h-96 px-8 py-6 mt-4 text-left bg-zing-800  rounded-xl shadow-lg">
+          <div className="flex flex-col justify-center items-center h-full select-none">
+            <div className="flex flex-col items-center justify-center gap-2 mb-8">
+
+              <p className="m-0 text-gray-400 text-[16px] font-semibold ">
+                Sign In
+              </p>
+
+            </div>
+          <form  method='POST' onSubmit={handleSubmit} >
+            <div className="w-full flex flex-col gap-2">
+              <label className="font-semibold text-xs text-gray-400">Username</label>
+              <input onChange={changeHandler} placeholder="Username" id="username" className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900"  />
+            </div>
+
+            
+
+            <div className="w-full flex flex-col gap-2">
+            <label className="font-semibold text-xs text-gray-400">Password</label>
+            <input onChange={changeHandler} placeholder="••••••••" id="password" type='password' className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900"   />
+          </div>
+          <div>
+            <button  className="py-1 px-8 bg-blue-500 hover:bg-blue-800 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg cursor-pointer select-none">
+              {loading ? 'Loading...' :'Sign In'}
+            </button>
+          </div>
+
+          <div>
+            
+          </div>
+
+          </form>
+          <div className="text-sm text-gray-400 flex gap-2 mt-3">
+            <span>Don't have an account?</span>
+            <Link className="hover:text-blue-800" to={"/signup"}>Sign up</Link>
+          </div>
+
+          </div>
+          
+
+        </div>
+      </div>
     </div>
   )
 }

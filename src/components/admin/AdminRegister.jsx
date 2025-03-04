@@ -2,17 +2,50 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function AdminRegister() {
-	const [adminFormData,setAdminFormData] = useState({})
+	const [adminFormData,setAdminFormData] = useState({
+		adminname : '',
+		email : '',
+		password : '',
+		file : ''
+	})
 	const [loading, setLoading] = useState(false)
 
-	function handleSubmit(e) {
-		e.preventDefault()
-		console.log(adminFormData)
-
-	}
+	
 
 	function handleChange(e) {
-		setAdminFormData({...adminFormData,[e.target.id] : e.target.value})
+		const {name,value,type,files} =e.target
+		if(type == 'file'){
+			const checkFile =  files[0].type
+
+			if(checkFile !== 'image/png' ){
+				e.target.value = ''
+				return alert('allow only png')
+			}
+		}
+		setAdminFormData({...adminFormData,[name] : type === 'file' ? files[0] : value })
+		
+	}
+
+	async function handleSubmit(e) {
+		e.preventDefault()
+
+		try{
+
+			const res = await fetch('/api/lms/admin/register',{
+				method : 'POST',
+				headers : {'Content-Type' : 'application/json'},
+				body : JSON.stringify(adminFormData)
+			})
+
+			const data =  await res.json()
+			console.log(data)
+
+		}catch(e){
+			console.error(e)
+		}
+
+
+
 	}
 
 	return (
@@ -30,17 +63,17 @@ function AdminRegister() {
 						<form  onSubmit={handleSubmit}>
 							<div className="w-full flex flex-col gap-2">
 								<label className="font-semibold text-xs text-gray-400">Admin name</label>
-								<input placeholder="Username" id="adminname" className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900" onChange={handleChange} />
+								<input placeholder="Admin name" name='adminname' id="adminname" className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900" onChange={handleChange} />
 							</div>
 
 							<div className="w-full flex flex-col gap-2">
 								<label className="font-semibold text-xs text-gray-400">Email</label>
-								<input placeholder="yourmail@" id="email" type='email' className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900" onChange={handleChange} />
+								<input placeholder="yourmail@" name='email' id="email" type='email' className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900" onChange={handleChange} />
 							</div>
 
 							<div className="w-full flex flex-col gap-2">
 								<label className="font-semibold text-xs text-gray-400">Password</label>
-								<input placeholder="••••••••" id="password" type='password' className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900" onChange={handleChange} />
+								<input placeholder="••••••••" name='password' id="password" type='password' className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900" onChange={handleChange} />
 							</div>
 
 							<div>
@@ -48,7 +81,7 @@ function AdminRegister() {
 									<div className="label">
 										<span className="label-text">Pick a Profile</span>
 									</div>
-									<input type="file" id="file" className="file-input file-input-bordered w-full max-w-xs" />
+									<input type="file" onChange={handleChange} name='file' id="file" className="file-input file-input-bordered w-full max-w-xs" />
 									
 								</label>
 							</div>

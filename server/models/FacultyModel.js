@@ -17,14 +17,16 @@ const facultySchema = mongoose.Schema({
         required : true,
     },
 
-    facultyCourse : {
-        type : String,
-        required : true
-    },
 
     profile :{
         type : String,
         required :true
+    },
+
+    adminId : {
+        type : mongoose.Schema.ObjectId,
+        ref : 'admin',
+        required : true,
     }
 
 },{timestamps:true})

@@ -6,12 +6,17 @@ import adminModel from "../models/AdminModel.js"
 
 export const adminRegister = async (req,res)=>{
     const {adminName,adminEmail,adminPassword}= req.body
+    const adminProfile = req.file
     try{
-        const checkUserAlreadyExist = await adminModel.findOne({adminEmail})
-
-        if(checkUserAlreadyExist){
-            return handleRes(res,400,"admin already register! try with diffrent email id")
+        // const checkUserAlreadyExist = await adminModel.findOne({adminEmail})
+        const adminCount = await adminModel.countDocuments();
+        if(adminCount > 0 ){
+            return handleRes(res,400,"Admin already created more than 1 admin is not allowed.")
         }
+
+        // if(checkUserAlreadyExist){
+        //     return handleRes(res,400,"admin already register! try with diffrent email id")
+        // }
 
 
         const salt = await bcrypt.genSalt(10)
