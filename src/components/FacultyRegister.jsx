@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
 
 function FacultyRegister() {
 
+    const [facultyFormData,setFacultyFormData] = useState({
+        
+    })
+
     const handleSubmit = async()=>{
 
     }
 
-    const handleChange = ()=>{
+    const handleChange = (e)=>{
 
     }
 
@@ -32,22 +36,22 @@ function FacultyRegister() {
           <form  method='POST' onSubmit={handleSubmit}>
             <div className="w-full flex flex-col gap-2">
               <label className="font-semibold text-xs text-gray-400">Username</label>
-              <input placeholder="Username" id="username" className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900" onChange={handleChange} />
+              <input placeholder="Username" name="username" id="username" className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900" onChange={handleChange} />
             </div>
 
             <div className="w-full flex flex-col gap-2">
               <label className="font-semibold text-xs text-gray-400">Email</label>
-              <input placeholder="yourmail@" id="email" type='email' className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900" onChange={handleChange} />
+              <input placeholder="yourmail@" id="email" name='email' type='email' className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900" onChange={handleChange} />
             </div>
 
             <div className="w-full flex flex-col gap-2">
             <label className="font-semibold text-xs text-gray-400">Password</label>
-            <input placeholder="••••••••" id="password" type='password' className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900"  onChange={handleChange} />
+            <input name="password" placeholder="••••••••" id="password" type='password' className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900"  onChange={handleChange} />
           </div>
 
           <div className="w-full flex flex-col gap-2">
               <label className="font-semibold text-xs text-gray-400">Upload Profile</label>
-              <input placeholder="yourmail@" id="email" type='file' className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900" onChange={handleChange} />
+              <input name='profile'  type='file' className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900" onChange={handleChange} />
             </div>
           <div>
 

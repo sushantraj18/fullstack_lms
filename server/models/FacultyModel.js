@@ -1,18 +1,18 @@
 import mongoose from "mongoose";
 
 const facultySchema = mongoose.Schema({
-    facultyName : {
+    username : {
         type : String,
         required :true
     },
     
-    facultyEmail :{
+    email :{
         type : String,
         unique : true,
         required : true
 
     },
-    facultyPassword : {
+    password : {
         type : String,
         required : true,
     },

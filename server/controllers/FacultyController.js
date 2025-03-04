@@ -4,26 +4,30 @@ import facultyModel from '../models/FacultyModel.js';
 import bcrypt, { genSalt } from 'bcrypt'
 
 export const facultyRegister = async(req,res)=>{
-    const {facultyName,facultyEmail,facultyPassword}= req.body;
+    const {username,email,password}= req.body;
     const {adminId}= req.params
     const profile = req.file
     console.log(adminId)
     console.log(profile)
     try{
 
-        if(!facultyName || !facultyEmail || !facultyPassword || !adminId || !profile){
+        if(!adminId){
+            return handleRes(res,400,"please provide admin id")
+        }
+
+        if(!username || !email || !password || !adminId || !profile){
             return handleRes(res,400,"all field required")
         }
 
-        const checkUser =  await facultyModel.findOne({facultyEmail})
+        const checkUser =  await facultyModel.findOne({email})
 
         if(checkUser){
             return handleRes(res,400,"faculty already register with this email")
         }
 
-        const hashPassword = await bcrypt.hash(facultyPassword,12)
+        const hashPassword = await bcrypt.hash(password,12)
 
-        const createFaculty =  new facultyModel({facultyName,facultyEmail,facultyPassword:hashPassword,profile : profile.filename,adminId})
+        const createFaculty =  new facultyModel({username,email,password:hashPassword,profile : profile.filename,adminId})
 
         await createFaculty.save()
 
@@ -37,15 +41,15 @@ export const facultyRegister = async(req,res)=>{
 
 
 export const facultyLogin = async (req,res)=>{
-    const {facultyEmail,facultyPassword} = req.body
+    const {email,password} = req.body
     try{
-        const checkFaculty =   await facultyModel.findOne({facultyEmail})
+        const checkFaculty =   await facultyModel.findOne({email})
         
         if(!checkFaculty){
             return handleRes(res,404,"invalid credential")
         }
 
-        const checkPassword = await bcrypt.compare(facultyPassword,checkFaculty.facultyPassword)
+        const checkPassword = await bcrypt.compare(password,checkFaculty.password)
 
         if(!checkPassword){
             return handleRes(res,400,"invalid credential")
